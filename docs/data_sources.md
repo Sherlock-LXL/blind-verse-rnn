@@ -24,7 +24,7 @@ Blind Verse 的最终预训练语料以现代诗为主体，并混合现代汉�
 - 本仓库不提交原始或处理后的外部语料；
 - 上游页面的许可证标签应与各项目的最新许可证和数据说明共同核对；
 - 数据集许可证不当然解决具体文本、作者权利或模型权重分发的全部问题；
-- 最终模型计划通过 GitHub Release 单独分发，代码许可证由作者另行添加；
+- 最终模型通过 GitHub Release 单独分发；仓库中的源代码和文档采用 MIT License，但该许可不自动覆盖数据与模型权重；
 - 使用者应自行确认其用途、地区和发布方式所需的授权与合规要求。
 
 ## English
@@ -51,5 +51,5 @@ To compare the two later corpus expansions under the same standard, `vocab_bench
 - Raw or processed external corpora are not committed to this repository;
 - Upstream license labels should be reviewed together with each project's current license and data documentation;
 - A dataset license does not automatically settle every question concerning individual texts, author rights, or model-weight distribution;
-- The final model is intended for separate distribution through a GitHub Release, while the author will add the code license separately;
+- The final model is distributed separately through a GitHub Release; source code and documentation in the repository use the MIT License, which does not automatically cover data or model weights;
 - Users are responsible for confirming the permissions and compliance requirements applicable to their use, jurisdiction, and publication method.

@@ -249,13 +249,13 @@ git remote add origin https://github.com/<your-username>/blind-verse-rnn.git
 git push -u origin main
 ```
 
-推送代码后，在 GitHub 创建 `v1.0.0` Release，并将本地 `checkpoints/best_finetuned_model.pth` 作为 Release asset 上传。不要解除 `.gitignore` 后把该文件直接加入普通 Git。作者计划在仓库建立后单独添加 `LICENSE`。
+推送代码后，在 GitHub 创建 `v1.0.0` Release，并将本地 `checkpoints/best_finetuned_model.pth` 作为 Release asset 上传。不要解除 `.gitignore` 后把该文件直接加入普通 Git。
 
 ### 数据、版权与许可
 
 本仓库只发布代码、文档和运行所需的冻结字符映射，不发布下载或整理后的原始外部语料。上游项目页面标示的许可证不当然替代对具体文本内容、作者权利和模型权重分发范围的独立判断。
 
-当前提交不包含 `LICENSE`；许可证将由作者在 GitHub 仓库建立后另行添加。在许可证文件添加前，不应假设代码或模型权重已经获得特定开源授权。
+除非另有说明，本仓库中的源代码和文档采用 [MIT License](LICENSE)。该许可不适用于原始或处理后的训练语料，也不自动适用于通过 GitHub Releases 分发的模型权重；如果程序包中包含模型权重，该权重仍受相同边界约束。冻结字符映射和第三方材料受其各自的权利与许可说明约束。
 
 ### 局限性
 
@@ -523,13 +523,13 @@ git remote add origin https://github.com/<your-username>/blind-verse-rnn.git
 git push -u origin main
 ```
 
-After pushing the code, create a `v1.0.0` GitHub Release and upload the local `checkpoints/best_finetuned_model.pth` as a release asset. Do not remove the ignore rule and commit this file to normal Git. The author plans to add `LICENSE` separately after the repository is created.
+After pushing the code, create a `v1.0.0` GitHub Release and upload the local `checkpoints/best_finetuned_model.pth` as a release asset. Do not remove the ignore rule and commit this file to normal Git.
 
 ### Data, copyright, and licensing
 
 This repository publishes code, documentation, and the frozen character mapping required at runtime. It does not redistribute downloaded or processed raw external corpora. A license label shown by an upstream project does not automatically replace a separate review of individual text rights, author rights, or the permitted distribution scope of trained model weights.
 
-The current commit does not include a `LICENSE` file. The author will add one separately after creating the GitHub repository. Until that file is added, no specific open-source permission for the code or model weights should be assumed.
+Unless otherwise stated, the source code and documentation in this repository are licensed under the [MIT License](LICENSE). This license does not apply to raw or processed training corpora and does not automatically apply to model weights distributed through GitHub Releases; if a program package contains model weights, those weights remain subject to the same boundary. The frozen character mapping and third-party materials remain subject to their respective rights and license notices.
 
 ### Limitations
 
