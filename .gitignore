@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE and notebooks
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Operating system
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local secrets and service configuration
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+hf_token
+hf_token.txt
+.hf_token
+
+# Hugging Face and dataset caches
+.cache/
+huggingface/
+hf_cache/
+datasets_cache/
+
+# Raw, downloaded, and processed corpora
+data/**
+!data/processed/
+data/processed/**
+!data/processed/vocab_benchmark.json
+
+# Model checkpoints and training artifacts
+checkpoints/*.pth
+checkpoints/*.pt
+checkpoints/*.ckpt
+*.onnx
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.temp
+~$*
