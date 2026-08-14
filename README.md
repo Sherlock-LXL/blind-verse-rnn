@@ -173,7 +173,9 @@ data/processed/vocab_benchmark.json
 checkpoints/best_finetuned_model.pth
 ```
 
-`vocab_benchmark.json` 是模型对应的冻结字符映射。最终 checkpoint 不提交到普通 Git 历史；首次发布后请从本项目的 GitHub Releases 页面下载 `best_finetuned_model.pth`，放入 `checkpoints/`。
+`vocab_benchmark.json` 是模型对应的冻结字符映射。最终 checkpoint 不提交到普通 Git 历史，而是通过 GitHub Release 分发。
+
+如果只使用 Windows 便携版，可直接下载 [BlindVerseRNN-v1.0.0.exe](https://github.com/Sherlock-LXL/blind-verse-rnn/releases/download/v1.0.0/BlindVerseRNN-v1.0.0.exe)，无需配置源码环境。使用源码或 Streamlit App 时，请下载 [best_finetuned_model.pth](https://github.com/Sherlock-LXL/blind-verse-rnn/releases/download/v1.0.0/best_finetuned_model.pth) 并放入 `checkpoints/`。
 
 ### 命令
 
@@ -445,7 +447,9 @@ data/processed/vocab_benchmark.json
 checkpoints/best_finetuned_model.pth
 ```
 
-`vocab_benchmark.json` is the frozen character mapping associated with the model. The final checkpoint is not committed to normal Git history. After the first release, download `best_finetuned_model.pth` from the repository's GitHub Releases page and place it under `checkpoints/`.
+`vocab_benchmark.json` is the frozen character mapping associated with the model. The final checkpoint is distributed through a GitHub Release rather than committed to normal Git history.
+
+To use only the portable Windows build, download [BlindVerseRNN-v1.0.0.exe](https://github.com/Sherlock-LXL/blind-verse-rnn/releases/download/v1.0.0/BlindVerseRNN-v1.0.0.exe) directly; no source environment setup is required. To run the source code or Streamlit App, download [best_finetuned_model.pth](https://github.com/Sherlock-LXL/blind-verse-rnn/releases/download/v1.0.0/best_finetuned_model.pth) and place it under `checkpoints/`.
 
 ### Commands
 
