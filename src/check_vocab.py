@@ -5,13 +5,11 @@ import json
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 def analyze_vocab(
     name,
@@ -22,18 +20,10 @@ def analyze_vocab(
     for sentence in sentences:
         char_counts.update(sentence)
     total_chars = sum(char_counts.values())
-    unknown_counts = {
-        char: count
-        for char, count in char_counts.items()
-        if char not in char_to_idx
-    }
+    unknown_counts = {char: count for char, count in char_counts.items() if char not in char_to_idx}
     unknown_total = sum(unknown_counts.values())
     unknown_unique = len(unknown_counts)
-    unknown_rate = (
-        unknown_total / total_chars
-        if total_chars > 0
-        else 0
-    )
+    unknown_rate = unknown_total / total_chars if total_chars > 0 else 0
     print(f"===== {name} =====")
     print(f"Sentences: {len(sentences):,}")
     print(f"Total chars: {total_chars:,}")
@@ -51,6 +41,7 @@ def analyze_vocab(
     print()
     return char_counts, unknown_counts
 
+
 with open(
     PROCESSED_DIR / "vocab_benchmark.json",
     "r",
@@ -61,18 +52,12 @@ print(f"Current vocab size: {len(char_to_idx):,}")
 print()
 
 datasets = {
-    "Pretrain Train":
-        PROCESSED_DIR / "pretrain_train.txt",
-    "Pretrain Val":
-        PROCESSED_DIR / "pretrain_val.txt",
-    "Benchmark":
-        PROCESSED_DIR / "pretrain_benchmark.txt",
-    "Blind Train":
-        PROCESSED_DIR / "train.txt",
-    "Blind Val":
-        PROCESSED_DIR / "val.txt",
-    "Blind Test":
-        PROCESSED_DIR / "test.txt",
+    "Pretrain Train": PROCESSED_DIR / "pretrain_train.txt",
+    "Pretrain Val": PROCESSED_DIR / "pretrain_val.txt",
+    "Benchmark": PROCESSED_DIR / "pretrain_benchmark.txt",
+    "Blind Train": PROCESSED_DIR / "train.txt",
+    "Blind Val": PROCESSED_DIR / "val.txt",
+    "Blind Test": PROCESSED_DIR / "test.txt",
 }
 
 all_pretrain_counts = Counter()

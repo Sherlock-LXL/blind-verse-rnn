@@ -64,16 +64,12 @@ for char, idx in list(char_to_idx.items())[:10]:
 print()
 
 example = unique_sentences[0]
-encoded = ([char_to_idx["<BOS>"]] + [char_to_idx[char] for char in example] + [char_to_idx["<EOS>"]])
+encoded = [char_to_idx["<BOS>"]] + [char_to_idx[char] for char in example] + [char_to_idx["<EOS>"]]
 print("原句:")
 print(example)
 print("编码:")
 print(encoded)
-decoded = "".join(
-    idx_to_char[idx]
-    for idx in encoded
-    if idx >= len(special_tokens)
-)
+decoded = "".join(idx_to_char[idx] for idx in encoded if idx >= len(special_tokens))
 print("解码:")
 print(decoded)
 print()
@@ -85,13 +81,14 @@ num_files = len(files)
 num_train = int(num_files * 0.8)
 num_val = int(num_files * 0.1)
 train_files = files[:num_train]
-val_files = files[num_train:num_train + num_val]
-test_files = files[num_train + num_val:]
+val_files = files[num_train : num_train + num_val]
+test_files = files[num_train + num_val :]
 print("文件划分：")
 print("train:", len(train_files))
 print("val:", len(val_files))
 print("test:", len(test_files))
 print()
+
 
 def load_sentences(file_paths):
     sentences = []
@@ -102,6 +99,7 @@ def load_sentences(file_paths):
             if line:
                 sentences.append(line)
     return sentences
+
 
 train_sentences = load_sentences(train_files)
 val_sentences = load_sentences(val_files)
@@ -114,8 +112,10 @@ print("test:", len(test_sentences))
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
+
 def save_sentences(sentences, path):
     path.write_text("\n".join(sentences), encoding="utf-8")
+
 
 save_sentences(train_sentences, PROCESSED_DIR / "train.txt")
 save_sentences(val_sentences, PROCESSED_DIR / "val.txt")

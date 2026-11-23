@@ -10,13 +10,11 @@ from .model import PoetryLSTM
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 train_sentences = load_sentences(PROCESSED_DIR / "train.txt")
 val_sentences = load_sentences(PROCESSED_DIR / "val.txt")
@@ -63,6 +61,7 @@ bos_id = char_to_idx["<BOS>"]
 eos_id = char_to_idx["<EOS>"]
 idx_to_char = {idx: char for char, idx in char_to_idx.items()}
 
+
 def evaluate(model, dataloader):
     model.eval()
     total_loss = 0
@@ -74,6 +73,7 @@ def evaluate(model, dataloader):
             loss = criterion(logits.reshape(-1, vocab_size), targets.reshape(-1))
             total_loss += loss.item()
     return total_loss / len(dataloader)
+
 
 def generate_line(
     model,
@@ -107,6 +107,7 @@ def generate_line(
             token_id = next_id
     return "".join(generated_chars)
 
+
 num_epochs = 50
 best_val_loss = float("inf")
 
@@ -128,11 +129,7 @@ for epoch in range(1, num_epochs + 1):
         total_train_loss += loss.item()
     train_loss = total_train_loss / len(train_loader)
     val_loss = evaluate(model, val_loader)
-    print(
-        f"Epoch {epoch:02d} | "
-        f"train loss: {train_loss:.4f} | "
-        f"val loss: {val_loss:.4f}"
-    )
+    print(f"Epoch {epoch:02d} | train loss: {train_loss:.4f} | val loss: {val_loss:.4f}")
     if val_loss < best_val_loss:
         best_val_loss = val_loss
         epochs_without_improvement = 0
@@ -148,24 +145,12 @@ for epoch in range(1, num_epochs + 1):
         print(f"  sample: {sample if sample else '[空句]'}")
 print()
 
-model.load_state_dict(
-    torch.load(
-        BEST_MODEL_PATH,
-        map_location=device,
-        weights_only=True
-    )
-)
+model.load_state_dict(torch.load(BEST_MODEL_PATH, map_location=device, weights_only=True))
 
 print("===== Blind Verse =====")
 for i in range(5):
-    line_a = generate_line(
-        model,
-        temperature=0.8
-    )
-    line_b = generate_line(
-        model,
-        temperature=0.8
-    )
+    line_a = generate_line(model, temperature=0.8)
+    line_b = generate_line(model, temperature=0.8)
     print()
     print(f"{i + 1}")
     print("A:", line_a)

@@ -42,12 +42,8 @@ for row in dataset:
     if total_chars >= target_chars:
         break
 
-print(
-    f"现代诗歌句子数: {len(modern_sentences)}"
-)
-print(
-    f"现代诗歌字符数: {total_chars}"
-)
+print(f"现代诗歌句子数: {len(modern_sentences)}")
+print(f"现代诗歌字符数: {total_chars}")
 print()
 
 print("随机样例:")

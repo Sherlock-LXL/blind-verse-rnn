@@ -18,10 +18,7 @@ total_chars = 0
 
 for row in dataset:
     text = row["modern"]
-    parts = re.split(
-        r"[，。！？；、,.!?;]",
-        text
-    )
+    parts = re.split(r"[，。！？；、,.!?;]", text)
     for part in parts:
         part = part.strip()
         if not re.fullmatch(r"[\u4e00-\u9fff]+", part):
@@ -38,12 +35,8 @@ for row in dataset:
     if total_chars >= target_chars:
         break
 
-print(
-    f"译文句子数: {len(translation_sentences)}"
-)
-print(
-    f"译文字符数: {total_chars}"
-)
+print(f"译文句子数: {len(translation_sentences)}")
+print(f"译文字符数: {total_chars}")
 print()
 
 print("随机样例:")

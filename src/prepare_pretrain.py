@@ -61,13 +61,11 @@ PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 (PROCESSED_DIR / "pretrain_train.txt").write_text("\n".join(pretrain_train), encoding="utf-8")
 (PROCESSED_DIR / "pretrain_val.txt").write_text("\n".join(pretrain_val), encoding="utf-8")
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 blind_train = load_sentences(PROCESSED_DIR / "train.txt")
 blind_val = load_sentences(PROCESSED_DIR / "val.txt")
@@ -90,6 +88,7 @@ for char, idx in list(char_to_idx.items())[:10]:
     print(idx, repr(char))
 print()
 
+
 def count_unknown(sentences, char_to_idx):
     unknown_count = 0
     total_count = 0
@@ -101,6 +100,7 @@ def count_unknown(sentences, char_to_idx):
                 unknown_count += 1
                 unknown_chars.add(char)
     return unknown_count, total_count, unknown_chars
+
 
 for name, sentences in [
     ("pretrain_val", pretrain_val),
@@ -114,7 +114,7 @@ for name, sentences in [
     print("unknown chars:", unknown_chars)
     print()
 
-VOCAB_PATH = (PROCESSED_DIR / "vocab_pretrain.json")
+VOCAB_PATH = PROCESSED_DIR / "vocab_pretrain.json"
 with open(
     VOCAB_PATH,
     "w",

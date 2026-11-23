@@ -2,6 +2,7 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 
+
 class PoetryDataset(Dataset):
     def __init__(self, sentences, char_to_idx):
         self.sentences = sentences
@@ -24,6 +25,7 @@ class PoetryDataset(Dataset):
         input_tensor = torch.tensor(input_ids, dtype=torch.long)
         target_tensor = torch.tensor(target_ids, dtype=torch.long)
         return input_tensor, target_tensor
+
 
 def collate_fn(batch):
     inputs, targets = zip(*batch)

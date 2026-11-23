@@ -12,13 +12,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 CHECKPOINT_DIR = PROJECT_ROOT / "checkpoints"
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 test_sentences = load_sentences(PROCESSED_DIR / "test.txt")
 val_sentences = load_sentences(PROCESSED_DIR / "val.txt")
@@ -57,7 +55,7 @@ model = PoetryLSTM(
     dropout=0.1,
 ).to(device)
 
-MODEL_PATH = (CHECKPOINT_DIR / "best_finetuned_model.pth")
+MODEL_PATH = CHECKPOINT_DIR / "best_finetuned_model.pth"
 
 model.load_state_dict(
     torch.load(
@@ -71,8 +69,12 @@ model.eval()
 print("Loaded fine-tuned model.")
 print()
 
+
 def evaluate_exact(model, dataloader):
-    criterion = nn.CrossEntropyLoss(ignore_index=pad_id, reduction="sum",)
+    criterion = nn.CrossEntropyLoss(
+        ignore_index=pad_id,
+        reduction="sum",
+    )
     total_loss = 0
     total_tokens = 0
     with torch.no_grad():
@@ -84,6 +86,7 @@ def evaluate_exact(model, dataloader):
             total_loss += loss.item()
             total_tokens += (targets != pad_id).sum().item()
     return total_loss / total_tokens
+
 
 val_loss = evaluate_exact(model, val_loader)
 test_loss = evaluate_exact(model, test_loader)

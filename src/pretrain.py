@@ -10,13 +10,11 @@ from .model import PoetryLSTM
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 train_sentences = load_sentences(PROCESSED_DIR / "pretrain_train.txt")
 val_sentences = load_sentences(PROCESSED_DIR / "pretrain_val.txt")
@@ -85,6 +83,7 @@ eos_id = char_to_idx["<EOS>"]
 unk_id = char_to_idx["<UNK>"]
 idx_to_char = {idx: char for char, idx in char_to_idx.items()}
 
+
 def evaluate(model, dataloader):
     model.eval()
     total_loss = 0
@@ -96,6 +95,7 @@ def evaluate(model, dataloader):
             loss = criterion(logits.reshape(-1, vocab_size), targets.reshape(-1))
             total_loss += loss.item()
     return total_loss / len(dataloader)
+
 
 def generate_line(
     model,
@@ -129,6 +129,7 @@ def generate_line(
             generated_chars.append(idx_to_char[next_id])
             token_id = next_id
     return "".join(generated_chars)
+
 
 num_epochs = 50
 best_val_loss = float("inf")

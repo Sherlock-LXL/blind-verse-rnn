@@ -10,13 +10,11 @@ from .model import PoetryLSTM
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
+
 def load_sentences(path):
     text = path.read_text(encoding="utf-8")
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
+    return [line.strip() for line in text.splitlines() if line.strip()]
+
 
 train_sentences = load_sentences(PROCESSED_DIR / "train.txt")
 val_sentences = load_sentences(PROCESSED_DIR / "val.txt")
@@ -55,7 +53,7 @@ model = PoetryLSTM(
     num_layers=1,
     dropout=0.1,
 ).to(device)
-PRETRAINED_MODEL_PATH = (CHECKPOINT_DIR / "best_pretrained_model_645kdata.pth")
+PRETRAINED_MODEL_PATH = CHECKPOINT_DIR / "best_pretrained_model_645kdata.pth"
 model.load_state_dict(
     torch.load(
         PRETRAINED_MODEL_PATH,
@@ -73,6 +71,7 @@ eos_id = char_to_idx["<EOS>"]
 unk_id = char_to_idx["<UNK>"]
 idx_to_char = {idx: char for char, idx in char_to_idx.items()}
 
+
 def evaluate(model, dataloader):
     model.eval()
     total_loss = 0
@@ -85,6 +84,7 @@ def evaluate(model, dataloader):
             total_loss += loss.item()
     return total_loss / len(dataloader)
 
+
 initial_val_loss = evaluate(model, val_loader)
 print(f"Before fine-tuning | val loss: {initial_val_loss:.4f}")
 print()
@@ -96,6 +96,7 @@ optimizer = torch.optim.AdamW(
     lr=4e-5,
     weight_decay=1e-4,
 )
+
 
 def generate_line(
     model,
@@ -129,6 +130,7 @@ def generate_line(
             generated_chars.append(idx_to_char[next_id])
             token_id = next_id
     return "".join(generated_chars)
+
 
 num_epochs = 30
 
